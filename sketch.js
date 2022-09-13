@@ -1,9 +1,9 @@
-const blockX = 50
-const blockY = 50
-const blockWidth = 30
-const blockHeight = 30
-const blockSpeedX = 1;
-const blockSpeedY = 1;
+blockX = 50
+blockY = 50
+blockWidth = 30
+blockHeight = 30
+blockSpeedX = 1;
+blockSpeedY = 1;
 
 function setup() 
 {
