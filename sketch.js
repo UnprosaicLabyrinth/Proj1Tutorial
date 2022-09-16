@@ -59,20 +59,6 @@ function setup()
 {
     createCanvas(windowWidth, windowHeight);
     background(0);
-    /*
-    for (let j = 0; j < N / 4; ++j) {
-        blocks[j] = new Block(width / 2, height / 2, s, s, 2 - (8 * j / N), 8 * j / N, 255);
-    }
-    for (let j = N / 4; j < N / 2; ++j) {
-        blocks[j] = new Block(width / 2, height / 2, s, s, -2 + (8 * j / N), -8 * j / N, 255);
-    }
-    for (let j = N / 2; j < 3 * (N / 4); ++j) {
-        blocks[j] = new Block(width / 2, height / 2, s, s, 2 - (8 * j / N), -8 * j / N, 255);
-    }
-    for (let j = 3 * (N / 4); j < N; ++j) {
-        blocks[j] = new Block(width / 2, height / 2, s, s, -2 + (8 * j / N), 8 * j / N, 255);
-    }
-    */
     for (let j = 0; j < N / 4; ++j) {
         balls[j] = new Ball(width / 2, height / 2, r, 2 - (8 * j / N), 8 * j / N, 255);
     }
@@ -85,14 +71,6 @@ function setup()
     for (let j = 3 * (N / 4); j < N; ++j) {
         balls[j] = new Ball(width / 2, height / 2, r, -2 + (8 * (j - (3 * N / 4)) / N), 8 * (j - (3 * N / 4)) / N, 255);
     }
-    /*
-    for (let j = 0; j < N / 4; ++j) {
-        blocks[j] = new Block(width / 2, height / 2, s, s, 2 - (8 * j / N), 2 - (8 * j / N), 255);
-        blocks[j + (N / 4)] = new Block(width / 2, height / 2, s, s, -2 + (8 * j / N), 2 - (8 * j / N), 255);
-        blocks[j + (N / 2)] = new Block(width / 2, height / 2, s, s, 2 - (8 * j / N), -2 + (8 * j / N), 255);
-        blocks[j + (3 * N / 4)] = new Block(width / 2, height / 2, s, s, -2 + (8 * j / N), -2 + (8 * j / N), 255);
-    }
-    */
 }
 
 function draw()
