@@ -1,11 +1,10 @@
-class Block
+class Ball
 {
-    constructor(x, y, width, height, speed_x, speed_y, gray)
+    constructor(x, y, radius, speed_x, speed_y, gray)
     {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.radius = radius;
         this.speed_x = speed_x;
         this.speed_y = speed_y;
         this.gray = gray;
@@ -14,18 +13,16 @@ class Block
     display()
     {
         fill(this.gray);
-        rect(this.x, this.y, this.width, this.height);
+        circle(this.x, this.y, this.radius);
     }
 
     move()
     {
         this.x += this.speed_x;
         this.y += this.speed_y;
-        if (this.x >= (width - this.width) || this.x <= this.width) {
+        if (this.x >= (width - this.radius) || this.x <= this.radius ||
+            this.y >= (height - this.radius) || this.y <= this.radius) {
             this.speed_x *= -1;
-        }
-        if (this.y >= (height - this.height) || this.y <= this.height) {
-            this.speed_y *= -1;
         }
     }
 
@@ -33,31 +30,29 @@ class Block
     {
         this.x += this.speed_x;
         this.y += this.speed_y;
-        if (this.x >= (width - this.width) || this.x <= this.width) {
+        if (this.x >= (width - this.radius) || this.x <= this.radius) {
             if (this.speed_x > 0) {
                 this.speed_x = -random(2, 7);
             } else {
                 this.speed_x = random(2,7); 
             }
             this.gray = random(256)
-            --this.width;
-            --this.height;
+            --this.radius;
         }
-        if (this.y >= (height - this.height) || this.y <= this.height) {
+        if (this.y >= (height - this.radius) || this.y <= this.radius) {
             if (this.speed_y > 0) {
                 this.speed_y = -random(2, 7);
             } else {
                 this.speed_y = random(2, 7); 
             }
             this.gray = random(256);
-            --this.width;
-            --this.height;
+            --this.radius;
         }   
     }
 }
 
-const s = 10
-let blocks = [];
+const r = 10
+let balls = [];
 let N = 200;
 
 function setup() 
@@ -79,16 +74,16 @@ function setup()
     }
     */
     for (let j = 0; j < N / 4; ++j) {
-        blocks[j] = new Block(width / 2, height / 2, s, s, 2 - (8 * j / N), 8 * j / N, 255);
+        balls[j] = new Ball(width / 2, height / 2, r, 2 - (8 * j / N), 8 * j / N, 255);
     }
     for (let j = N / 4; j < N / 2; ++j) {
-        blocks[j] = new Block(width / 2, height / 2, s, s, -2 + (8 * (j - (N / 4)) / N), -8 * (j - (N / 4)) / N, 255);
+        balls[j] = new Ball(width / 2, height / 2, r, -2 + (8 * (j - (N / 4)) / N), -8 * (j - (N / 4)) / N, 255);
     }
     for (let j = N / 2; j < 3 * (N / 4); ++j) {
-        blocks[j] = new Block(width / 2, height / 2, s, s, 2 - (8 * (j - (N / 2)) / N), -8 * (j - (N / 2)) / N, 255);
+        balls[j] = new Ball(width / 2, height / 2, r, 2 - (8 * (j - (N / 2)) / N), -8 * (j - (N / 2)) / N, 255);
     }
     for (let j = 3 * (N / 4); j < N; ++j) {
-        blocks[j] = new Block(width / 2, height / 2, s, s, -2 + (8 * (j - (3 * N / 4)) / N), 8 * (j - (3 * N / 4)) / N, 255);
+        balls[j] = new Ball(width / 2, height / 2, r, -2 + (8 * (j - (3 * N / 4)) / N), 8 * (j - (3 * N / 4)) / N, 255);
     }
     /*
     for (let j = 0; j < N / 4; ++j) {
@@ -103,7 +98,7 @@ function setup()
 function draw()
 {
     for (let i = 0; i < N; i++) {
-        blocks[i].display();
-        blocks[i].mad_move();
+        balls[i].display();
+        balls[i].mad_move();
     }
 }
