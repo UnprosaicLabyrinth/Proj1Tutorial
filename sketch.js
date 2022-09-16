@@ -40,6 +40,8 @@ class Block
                 this.speed_x = random(2,7); 
             }
             this.gray = random(256)
+            --this.width;
+            --this.height;
         }
         if (this.y >= (height - this.height) || this.y <= this.height) {
             if (this.speed_y > 0) {
@@ -48,11 +50,13 @@ class Block
                 this.speed_y = random(2, 7); 
             }
             this.gray = random(256);
+            --this.width;
+            --this.height;
         }   
     }
 }
 
-const s = 5
+const s = 10
 let blocks = [];
 let N = 200;
 
@@ -60,27 +64,45 @@ function setup()
 {
     createCanvas(windowWidth, windowHeight);
     background(0);
-    dir = 1
-    for (let i = 0; i < N + 1; i++) {
-        if (dir == 1) {
-            blocks[i] = new Block(width / 2, height / 2, s, s, -2, 2, 255);
-            dir = 2;
-        } else if (dir == 2) {
-            blocks[i] = new Block(width / 2, height / 2, s, s, 2, 2, 255);
-            dir = 3;
-        } else if (dir == 3) {
-            blocks[i] = new Block(width / 2, height / 2, s, s, 2, -2, 255);
-            dir = 4;
-        } else {
-            blocks[i] = new Block(width / 2, height / 2, s, s, -2, -2, 255);
-            dir = 1;
-        }
+    /*
+    for (let j = 0; j < N / 4; ++j) {
+        blocks[j] = new Block(width / 2, height / 2, s, s, 2 - (8 * j / N), 8 * j / N, 255);
     }
+    for (let j = N / 4; j < N / 2; ++j) {
+        blocks[j] = new Block(width / 2, height / 2, s, s, -2 + (8 * j / N), -8 * j / N, 255);
+    }
+    for (let j = N / 2; j < 3 * (N / 4); ++j) {
+        blocks[j] = new Block(width / 2, height / 2, s, s, 2 - (8 * j / N), -8 * j / N, 255);
+    }
+    for (let j = 3 * (N / 4); j < N; ++j) {
+        blocks[j] = new Block(width / 2, height / 2, s, s, -2 + (8 * j / N), 8 * j / N, 255);
+    }
+    */
+    for (let j = 0; j < N / 4; ++j) {
+        blocks[j] = new Block(width / 2, height / 2, s, s, 2 - (8 * j / N), 8 * j / N, 255);
+    }
+    for (let j = N / 4; j < N / 2; ++j) {
+        blocks[j] = new Block(width / 2, height / 2, s, s, -2 + (8 * (j - (N / 4)) / N), -8 * (j - (N / 4)) / N, 255);
+    }
+    for (let j = N / 2; j < 3 * (N / 4); ++j) {
+        blocks[j] = new Block(width / 2, height / 2, s, s, 2 - (8 * (j - (N / 2)) / N), -8 * (j - (N / 2)) / N, 255);
+    }
+    for (let j = 3 * (N / 4); j < N; ++j) {
+        blocks[j] = new Block(width / 2, height / 2, s, s, -2 + (8 * (j - (3 * N / 4)) / N), 8 * (j - (3 * N / 4)) / N, 255);
+    }
+    /*
+    for (let j = 0; j < N / 4; ++j) {
+        blocks[j] = new Block(width / 2, height / 2, s, s, 2 - (8 * j / N), 2 - (8 * j / N), 255);
+        blocks[j + (N / 4)] = new Block(width / 2, height / 2, s, s, -2 + (8 * j / N), 2 - (8 * j / N), 255);
+        blocks[j + (N / 2)] = new Block(width / 2, height / 2, s, s, 2 - (8 * j / N), -2 + (8 * j / N), 255);
+        blocks[j + (3 * N / 4)] = new Block(width / 2, height / 2, s, s, -2 + (8 * j / N), -2 + (8 * j / N), 255);
+    }
+    */
 }
 
 function draw()
 {
-    for (let i = 0; i < N + 1; i++) {
+    for (let i = 0; i < N; i++) {
         blocks[i].display();
         blocks[i].mad_move();
     }
