@@ -40,8 +40,6 @@ class Block
                 this.speed_x = random(2,7); 
             }
             this.gray = random(256)
-            --this.width;
-            --this.height;
         }
         if (this.y >= (height - this.height) || this.y <= this.height) {
             if (this.speed_y > 0) {
@@ -50,8 +48,6 @@ class Block
                 this.speed_y = random(2, 7); 
             }
             this.gray = random(256);
-            --this.width;
-            --this.height;
         }   
     }
 }
